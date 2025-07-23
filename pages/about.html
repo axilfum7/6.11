@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form class="form" action="">
+      <input class="inp" type="text" />
+      <button>submit</button>
+    </form>
+
+    <script>
+      const BASE_URL = "https://6852a7200594059b23ce857f.mockapi.io";
+      const formEl = document.querySelector(".form");
+      const inpEl = document.querySelector(".inp");
+
+      formEl.addEventListener("submit", (e) => {
+        e.preventDefault();
+        let newArticle = {
+          title: inpEl.value,
+        };
+
+        fetch(`${BASE_URL}/article`, {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(newArticle),
+        });
+      });
+
+      function createArticle(data) {
+        data?.forEach((item) => {
+          const divEl = document.createElement("div");
+          divEl.innerHTML = `
+            <img src=${item.image} width="300" alt="">
+            <h3>${item.title}</h3>
+            `;
+            document.body.appendChild(divEl)
+        });
+      }
+
+      function fetchData(endpoint, cl) {
+        // url, options || return Promise
+        fetch(`${BASE_URL}/${endpoint}`, {
+          method: "GET",
+        })
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("internal server error");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            cl(data);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+
+      fetchData("article", createArticle);
+    </script>
+  </body>
+</html>
