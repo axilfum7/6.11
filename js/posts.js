@@ -19,10 +19,8 @@ function createRecipes(data) {
     const cardEl = document.createElement("div")
     cardEl.classList.add("card")
     cardEl.innerHTML = `
-      <img src=${item.body[0]} alt="">
-      <h3>${item.reactions}</h3>         
-      <p>${item.views}</p>
-      <p>${item.tags}</p>
+      <h3>${item.title}</h3>         
+      <p>${item.body}</p>
     `
     fragment.appendChild(cardEl)
   })

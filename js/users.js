@@ -19,7 +19,7 @@ function createRecipes(data) {
     const cardEl = document.createElement("div")
     cardEl.classList.add("card")
     cardEl.innerHTML = `
-   <img src=${item.image[0]} alt="">
+   <img src=${item.image} alt="">
       <h3>${item.firstName}</h3>         
       <p>${item.lastName}</p>
       <p>${item.maidenName}</p>
@@ -57,4 +57,4 @@ function fetchData(endpoint, cl, query="", loading) {
 
 window.onload = ()=>{
   fetchData("products", createRecipes, `?limit=${limit}&skip=0`,manageLoading);
-}
+} 
